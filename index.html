@@ -43,12 +43,12 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <button id="case-minus-btn" class="btn btn-default"><i class="fas fa-minus"></i></button>
                            <input id="case-input-value" type="text" class="form-control text-center" value="1">
                            <button id="case-plus-btn" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$59</h5>
+                        <h5 id="case-price">$59</h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -80,9 +80,44 @@
 
 
    <script>
-      const casePlusButton = document.getElementById('case-plus-btn').addEventListener('click', function(){
-         document.getElementById('case-input-value');
-      })
+      document.getElementById('case-plus-btn').addEventListener('click', function(){
+         controlPricePage(true);
+      });
+      document.getElementById('case-minus-btn').addEventListener('click', function(){
+         controlPricePage(false);
+      });
+
+      function controlPricePage(isPricePlus){
+         const caseInputButton = document.getElementById('case-input-value');
+         const caseInputButtonValue = parseFloat(caseInputButton.value);
+         let caseNewValue = caseInputButtonValue;
+         if(isPricePlus == true){
+            caseNewValue = caseInputButtonValue + 1;
+         }if(isPricePlus == false && caseInputButtonValue > 0){
+            caseNewValue = caseInputButtonValue - 1;
+         }
+         caseInputButton.value = caseNewValue;
+         const casePrice = caseNewValue * 59;
+         document.getElementById('case-price').innerHTML = '$' + casePrice;
+      }
+
+
+      // document.getElementById('case-plus-btn').addEventListener('click', function(){
+      //    const caseInputButton = document.getElementById('case-input-value');
+      //    const caseInputButtonValue = parseFloat(caseInputButton.value);
+      //    const caseNewValue = caseInputButtonValue + 1;
+      //    caseInputButton.value = caseNewValue;
+      //    const casePrice = caseNewValue * 59;
+      //    document.getElementById('case-price').innerHTML = '$' + casePrice;
+      // });
+      // document.getElementById('case-minus-btn').addEventListener('click', function(){
+      //    const caseInputButton = document.getElementById('case-input-value');
+      //    const caseInputButtonValue = parseFloat(caseInputButton.value);
+      //    const caseNewValue = caseInputButtonValue - 1;
+      //    caseInputButton.value = caseNewValue;
+      //    const casePrice = caseNewValue * 59;
+      //    document.getElementById('case-price').innerHTML = '$' + casePrice;
+      // });
    </script>
 </body>
 
