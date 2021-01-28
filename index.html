@@ -25,11 +25,11 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button onclick="controlPhonePrice(false)" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="iPhone-input-value" type="text" class="form-control text-center" value="1">
+                           <button onclick="controlPhonePrice(true)" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$1219</h5>
+                        <h5 id="iPhone-price">$1219</h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -43,9 +43,9 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button id="case-minus-btn" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <button onclick="controlCasePrice(false)" class="btn btn-default"><i class="fas fa-minus"></i></button>
                            <input id="case-input-value" type="text" class="form-control text-center" value="1">
-                           <button id="case-plus-btn" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button onclick="controlCasePrice(true)" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
                         <h5 id="case-price">$59</h5>
@@ -80,26 +80,34 @@
 
 
    <script>
-      document.getElementById('case-plus-btn').addEventListener('click', function(){
-         controlPricePage(true);
-      });
-      document.getElementById('case-minus-btn').addEventListener('click', function(){
-         controlPricePage(false);
-      });
+      function controlPhonePrice(isPhonePrice){
+         const iPhoneInputButton = document.getElementById('iPhone-input-value');
+         const iPhoneInputButtonValue = parseFloat(iPhoneInputButton.value);
+         let iPhoneNewValue = iPhoneInputButtonValue;
+         if(isPhonePrice == true){
+            iPhoneNewValue = iPhoneInputButtonValue + 1;
+         }if(isPhonePrice == false){
+            iPhoneNewValue = iPhoneInputButtonValue - 1;
+         }
+         iPhoneInputButton.value = iPhoneNewValue;
+         const iPhonePrice = iPhoneNewValue * 1219;
+         document.getElementById('iPhone-price').innerHTML = iPhonePrice;
+      };
 
-      function controlPricePage(isPricePlus){
+      
+      function controlCasePrice(isCasePrice){
          const caseInputButton = document.getElementById('case-input-value');
          const caseInputButtonValue = parseFloat(caseInputButton.value);
          let caseNewValue = caseInputButtonValue;
-         if(isPricePlus == true){
+         if(isCasePrice == true){
             caseNewValue = caseInputButtonValue + 1;
-         }if(isPricePlus == false && caseInputButtonValue > 0){
+         }if(isCasePrice == false && caseInputButtonValue > 0){
             caseNewValue = caseInputButtonValue - 1;
          }
          caseInputButton.value = caseNewValue;
          const casePrice = caseNewValue * 59;
          document.getElementById('case-price').innerHTML = '$' + casePrice;
-      }
+      };
 
 
       // document.getElementById('case-plus-btn').addEventListener('click', function(){
